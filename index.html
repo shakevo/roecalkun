@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ROE計算くんは、ROE(自己資本利益率),ROA(総資産利益率),ROI(投資利益率)を自動で計算するツール。当期純利益,自己資本,総資産,投資利益,投資額を入力するだけ。"/>
+    <title>ROE計算くん</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ROE計算くん</h1>
+        <form id="financial-form">
+            <div class="form-group">
+                <label for="company">会社名</label>
+                <input type="text" id="company" name="company" required>
+            </div>
+            <div class="form-group">
+                <label for="unit">入力単位</label>
+                <select id="unit" name="unit">
+                    <option value="1">円</option>
+                    <option value="1000000">百万円</option>
+                    <option value="1000">千円</option>
+                </select>
+            </div>
+            <div id="years-container">
+                <div class="year-group">
+                    <h2>--</h2>
+                    <div class="form-group">
+                        <label for="year">決算年月</label>
+                        <input type="month" class="year" required onchange="updateYear(this)">
+                    </div>
+                    <div class="form-group">
+                        <label for="netIncome">当期純利益</label>
+                        <input type="number" class="netIncome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="equity">自己資本</label>
+                        <input type="number" class="equity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assets">総資産</label>
+                        <input type="number" class="assets" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="investmentIncome">投資利益</label>
+                        <input type="number" class="investmentIncome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="investment">投資額</label>
+                        <input type="number" class="investment" required>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="addYear()">追加</button>
+                <button type="button" onclick="calculate()">計算</button>
+                <button type="button" onclick="downloadCSV()">CSV出力</button>
+            </div>
+        </form>
+        <div id="results">
+            <h2>結果</h2>
+            <div id="result-container"></div>
+            <p><small>※計算結果は保証いたしません。自身の判断でご利用ください※</small></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
